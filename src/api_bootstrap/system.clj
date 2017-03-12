@@ -3,7 +3,8 @@
             [api-bootstrap.sysinfo]
             [compojure.core :refer [routes]]
             [ring.adapter.jetty :refer [run-jetty]]
-            [integrant.core :as ig]))
+            [integrant.core :as ig]
+            [hikari-cp.core :refer [make-datasource close-datasource]]))
 
 (def system-config
   {:adapter/jetty    {:port    8000
@@ -11,7 +12,13 @@
                       :join?   false}
    :handler          {:endpoints [(ig/ref :endpoint/sysinfo) (ig/ref :endpoint/crud)]}
    :endpoint/sysinfo {}
-   :endpoint/crud    {}})
+   :endpoint/crud    {:datasource (ig/ref :datasource)}
+   :datasource       {:adapter       "mariadb"
+                      :database-name "hotels"
+                      :username      "root"
+                      :password      ""
+                      :server-name   "localhost"
+                      :port-number   3306}})
 
 (defmethod ig/init-key :handler [_ {:keys [endpoints]}]
   (apply routes endpoints))
@@ -23,3 +30,9 @@
 (defmethod ig/halt-key! :adapter/jetty [_ server]
   (.stop server)
   (.join server))
+
+(defmethod ig/init-key :datasource [_ config]
+  (make-datasource config))
+
+(defmethod ig/halt-key! :datasource [_ datasource]
+  (close-datasource datasource))
