@@ -19,3 +19,7 @@
 (defmethod ig/init-key :adapter/jetty [_ {:keys [port handler join?]}]
   (run-jetty handler {:join? join?
                       :port  port}))
+
+(defmethod ig/halt-key! :adapter/jetty [_ server]
+  (.stop server)
+  (.join server))

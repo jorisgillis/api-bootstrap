@@ -10,4 +10,7 @@
                  [ring/ring-defaults "0.2.3"]
                  [ring/ring-json "0.4.0"]
                  [compojure "1.5.2"]]
+  :profiles {:dev {:dependencies [[integrant/repl "0.1.1"]]
+                   :source-paths ["dev"]
+                   :main         user}}
   :main api-bootstrap.main)
