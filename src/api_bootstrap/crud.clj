@@ -1,12 +1,11 @@
 (ns api-bootstrap.crud
   (:require [api-bootstrap.endpoint :refer [make-api-handler]]
-            [api-bootstrap.restaurants :refer [fetch-restaurants]]
-            [api-bootstrap.db :refer [new-connection]]
+            [api-bootstrap.restaurants :refer [get-all-restaurants]]
             [integrant.core :as ig]
             [compojure.core :refer :all]
             [ring.util.response :refer [response]]))
 
-(defn- make-handler [datasource]
+(defn make-handler [datasource]
   (routes
     (context "/" []
       (GET "/" []
@@ -14,7 +13,7 @@
 
       (context "/restaurants/" []
         (GET "/" []
-          (response (fetch-restaurants {} (new-connection datasource))))))))
+          (response {:restaurants (get-all-restaurants datasource)}))))))
 
 
 (defmethod ig/init-key :endpoint/crud [_ {datasource :datasource}]

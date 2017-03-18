@@ -38,6 +38,18 @@ To build a jar:
 lein uberjar
 ```
 
+## Testing
+
+Running tests:
+```
+lein midje
+```
+
+Continuous testing:
+```
+lein midje :autotest
+```
+
 ## License
 
 Copyright © 2017 Joris Gillis

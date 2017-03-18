@@ -5,7 +5,7 @@
             :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/java.jdbc "0.4.2"]
-                 [integrant "0.2.2"]
+                 [integrant "0.3.0"]
                  [ring "1.5.0"]
                  [ring/ring-jetty-adapter "1.5.1"]
                  [ring/ring-defaults "0.2.3"]
@@ -14,7 +14,11 @@
                  [hikari-cp "1.7.5"]
                  [org.mariadb.jdbc/mariadb-java-client "1.5.8"]
                  [yesql "0.5.0"]]
-  :profiles {:dev {:dependencies [[integrant/repl "0.1.1"]]
+  :profiles {:dev {:dependencies [[integrant/repl "0.1.1"]
+                                  [midje "1.8.3"]
+                                  [peridot "0.4.4"]
+                                  [org.clojure/data.json "0.2.6"]]
+                   :plugins      [[lein-midje "3.2.1"]]
                    :source-paths ["dev"]
                    :main         user}}
   :main api-bootstrap.main
