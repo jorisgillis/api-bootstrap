@@ -1,0 +1,20 @@
+CREATE DATABASE restaurants;
+
+USE restaurants;
+
+CREATE TABLE restaurant (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255)
+);
+
+CREATE TABLE user (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255)
+);
+
+CREATE TABLE rating (
+  id INTEGER PRIMARY KEY AUTO_INCREMENT,
+  user_id INTEGER REFERENCES user(id),
+  restaurant_id INTEGER REFERENCES restaurant(id),
+  stars INTEGER
+);

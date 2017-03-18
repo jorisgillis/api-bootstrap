@@ -14,10 +14,10 @@
    :endpoint/sysinfo {}
    :endpoint/crud    {:datasource (ig/ref :datasource)}
    :datasource       {:adapter       "mariadb"
-                      :database-name "hotels"
+                      :database-name "restaurants"
                       :username      "root"
                       :password      ""
-                      :server-name   "localhost"
+                      :server-name   "127.0.0.1"
                       :port-number   3306}})
 
 (defmethod ig/init-key :handler [_ {:keys [endpoints]}]

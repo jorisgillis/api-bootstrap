@@ -2,6 +2,23 @@
 
 A skeleton Clojure project for building a REST API. 
 
+## Setup
+
+Start MariaDB in a Docker container:
+```
+docker run -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -p 3306:3306 -d mariadb
+```
+
+Try to connect:
+```
+mysql -h 127.0.0.1 -uroot 
+```
+
+Initialize database:
+```
+mysql -h 127.0.0.1 -uroot < init-db.sql
+```
+
 ## Usage
 
 Development:
